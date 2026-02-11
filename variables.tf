@@ -34,7 +34,7 @@ EOT
     namespace_id        = optional(string)
     namespace_name      = optional(string)
     resource_group_name = optional(string)
-    status              = optional(string, "Active")
+    status              = optional(string) # Default: "Active"
     capture_description = optional(object({
       destination = object({
         archive_name_format = string
@@ -44,9 +44,9 @@ EOT
       })
       enabled             = bool
       encoding            = string
-      interval_in_seconds = optional(number, 300)
-      size_limit_in_bytes = optional(number, 314572800)
-      skip_empty_archives = optional(bool, false)
+      interval_in_seconds = optional(number) # Default: 300
+      size_limit_in_bytes = optional(number) # Default: 314572800
+      skip_empty_archives = optional(bool)   # Default: false
     }))
     retention_description = optional(object({
       cleanup_policy                    = string
