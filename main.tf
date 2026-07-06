@@ -13,10 +13,12 @@ resource "azurerm_eventhub" "eventhubs" {
     for_each = each.value.capture_description != null ? [each.value.capture_description] : []
     content {
       destination {
-        archive_name_format = capture_description.value.destination.archive_name_format
-        blob_container_name = capture_description.value.destination.blob_container_name
-        name                = capture_description.value.destination.name
-        storage_account_id  = capture_description.value.destination.storage_account_id
+        archive_name_format         = capture_description.value.destination.archive_name_format
+        blob_container_name         = capture_description.value.destination.blob_container_name
+        name                        = capture_description.value.destination.name
+        storage_account_id          = capture_description.value.destination.storage_account_id
+        storage_authentication_id   = capture_description.value.destination.storage_authentication_id
+        storage_authentication_type = capture_description.value.destination.storage_authentication_type
       }
       enabled             = capture_description.value.enabled
       encoding            = capture_description.value.encoding
