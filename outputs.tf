@@ -1,45 +1,41 @@
-output "eventhubs" {
-  description = "All eventhub resources"
-  value       = azurerm_eventhub.eventhubs
-}
 output "eventhubs_capture_description" {
-  description = "List of capture_description values across all eventhubs"
-  value       = [for k, v in azurerm_eventhub.eventhubs : v.capture_description]
+  description = "Map of capture_description values across all eventhubs, keyed the same as var.eventhubs"
+  value       = { for k, v in azurerm_eventhub.eventhubs : k => v.capture_description }
 }
 output "eventhubs_message_retention" {
-  description = "List of message_retention values across all eventhubs"
-  value       = [for k, v in azurerm_eventhub.eventhubs : v.message_retention]
+  description = "Map of message_retention values across all eventhubs, keyed the same as var.eventhubs"
+  value       = { for k, v in azurerm_eventhub.eventhubs : k => v.message_retention }
 }
 output "eventhubs_name" {
-  description = "List of name values across all eventhubs"
-  value       = [for k, v in azurerm_eventhub.eventhubs : v.name]
+  description = "Map of name values across all eventhubs, keyed the same as var.eventhubs"
+  value       = { for k, v in azurerm_eventhub.eventhubs : k => v.name }
 }
 output "eventhubs_namespace_id" {
-  description = "List of namespace_id values across all eventhubs"
-  value       = [for k, v in azurerm_eventhub.eventhubs : v.namespace_id]
+  description = "Map of namespace_id values across all eventhubs, keyed the same as var.eventhubs"
+  value       = { for k, v in azurerm_eventhub.eventhubs : k => v.namespace_id }
 }
 output "eventhubs_namespace_name" {
-  description = "List of namespace_name values across all eventhubs"
-  value       = [for k, v in azurerm_eventhub.eventhubs : v.namespace_name]
+  description = "Map of namespace_name values across all eventhubs, keyed the same as var.eventhubs"
+  value       = { for k, v in azurerm_eventhub.eventhubs : k => v.namespace_name }
 }
 output "eventhubs_partition_count" {
-  description = "List of partition_count values across all eventhubs"
-  value       = [for k, v in azurerm_eventhub.eventhubs : v.partition_count]
+  description = "Map of partition_count values across all eventhubs, keyed the same as var.eventhubs"
+  value       = { for k, v in azurerm_eventhub.eventhubs : k => v.partition_count }
 }
 output "eventhubs_partition_ids" {
-  description = "List of partition_ids values across all eventhubs"
-  value       = [for k, v in azurerm_eventhub.eventhubs : v.partition_ids]
+  description = "Map of partition_ids values across all eventhubs, keyed the same as var.eventhubs"
+  value       = { for k, v in azurerm_eventhub.eventhubs : k => v.partition_ids }
 }
 output "eventhubs_resource_group_name" {
-  description = "List of resource_group_name values across all eventhubs"
-  value       = [for k, v in azurerm_eventhub.eventhubs : v.resource_group_name]
+  description = "Map of resource_group_name values across all eventhubs, keyed the same as var.eventhubs"
+  value       = { for k, v in azurerm_eventhub.eventhubs : k => v.resource_group_name }
 }
 output "eventhubs_retention_description" {
-  description = "List of retention_description values across all eventhubs"
-  value       = [for k, v in azurerm_eventhub.eventhubs : v.retention_description]
+  description = "Map of retention_description values across all eventhubs, keyed the same as var.eventhubs"
+  value       = { for k, v in azurerm_eventhub.eventhubs : k => v.retention_description }
 }
 output "eventhubs_status" {
-  description = "List of status values across all eventhubs"
-  value       = [for k, v in azurerm_eventhub.eventhubs : v.status]
+  description = "Map of status values across all eventhubs, keyed the same as var.eventhubs"
+  value       = { for k, v in azurerm_eventhub.eventhubs : k => v.status }
 }
 
