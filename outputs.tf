@@ -1,3 +1,7 @@
+output "eventhubs_id" {
+  description = "Map of id values across all eventhubs, keyed the same as var.eventhubs"
+  value       = { for k, v in azurerm_eventhub.eventhubs : k => v.id }
+}
 output "eventhubs_capture_description" {
   description = "Map of capture_description values across all eventhubs, keyed the same as var.eventhubs"
   value       = { for k, v in azurerm_eventhub.eventhubs : k => v.capture_description }
