@@ -36,7 +36,7 @@ EOT
     namespace_id        = optional(string)
     namespace_name      = optional(string)
     resource_group_name = optional(string)
-    status              = optional(string) # Default: "Active"
+    status              = optional(string)
     capture_description = optional(object({
       destination = object({
         archive_name_format         = string
@@ -44,13 +44,13 @@ EOT
         name                        = string
         storage_account_id          = string
         storage_authentication_id   = optional(string)
-        storage_authentication_type = optional(string) # Default: "StorageSAS"
+        storage_authentication_type = optional(string)
       })
       enabled             = bool
       encoding            = string
-      interval_in_seconds = optional(number) # Default: 300
-      size_limit_in_bytes = optional(number) # Default: 314572800
-      skip_empty_archives = optional(bool)   # Default: false
+      interval_in_seconds = optional(number)
+      size_limit_in_bytes = optional(number)
+      skip_empty_archives = optional(bool)
     }))
     retention_description = optional(object({
       cleanup_policy                    = string
@@ -58,30 +58,6 @@ EOT
       tombstone_retention_time_in_hours = optional(number)
     }))
   }))
-  validation {
-    condition = alltrue([
-      for k, v in var.eventhubs : (
-        v.capture_description == null || (v.capture_description.interval_in_seconds == null || (v.capture_description.interval_in_seconds >= 60 && v.capture_description.interval_in_seconds <= 900))
-      )
-    ])
-    error_message = "must be between 60 and 900"
-  }
-  validation {
-    condition = alltrue([
-      for k, v in var.eventhubs : (
-        v.capture_description == null || (v.capture_description.size_limit_in_bytes == null || (v.capture_description.size_limit_in_bytes >= 10485760 && v.capture_description.size_limit_in_bytes <= 524288000))
-      )
-    ])
-    error_message = "must be between 10485760 and 524288000"
-  }
-  validation {
-    condition = alltrue([
-      for k, v in var.eventhubs : (
-        v.capture_description == null || (contains(["EventHubArchive.AzureBlockBlob"], v.capture_description.destination.name))
-      )
-    ])
-    error_message = "must be one of: EventHubArchive.AzureBlockBlob"
-  }
   # --- Unconfirmed validation candidates, derived from azurerm_eventhub's provider source ---
   # Not auto-enabled: either a bespoke provider validator we can't safely translate,
   # or a path that crosses a list-typed block (needs its own for_each wrapping).
@@ -100,6 +76,15 @@ EOT
   #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
   # path: capture_description.encoding
   #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
+  # path: capture_description.interval_in_seconds
+  #   condition: value >= 60 && value <= 900
+  #   message:   must be between 60 and 900
+  # path: capture_description.size_limit_in_bytes
+  #   condition: value >= 10485760 && value <= 524288000
+  #   message:   must be between 10485760 and 524288000
+  # path: capture_description.destination.name
+  #   condition: contains(["EventHubArchive.AzureBlockBlob"], value)
+  #   message:   must be one of: EventHubArchive.AzureBlockBlob
   # path: capture_description.destination.archive_name_format
   #   source:    [from validate.ValidateEventHubArchiveNameFormat] !strings.Contains(value, component)
   # path: capture_description.destination.storage_account_id
