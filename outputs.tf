@@ -18,10 +18,6 @@ output "eventhubs_namespace_id" {
   description = "Map of namespace_id values across all eventhubs, keyed the same as var.eventhubs"
   value       = { for k, v in azurerm_eventhub.eventhubs : k => v.namespace_id if v.namespace_id != null && length(v.namespace_id) > 0 }
 }
-output "eventhubs_namespace_name" {
-  description = "Map of namespace_name values across all eventhubs, keyed the same as var.eventhubs"
-  value       = { for k, v in azurerm_eventhub.eventhubs : k => v.namespace_name if v.namespace_name != null && length(v.namespace_name) > 0 }
-}
 output "eventhubs_partition_count" {
   description = "Map of partition_count values across all eventhubs, keyed the same as var.eventhubs"
   value       = { for k, v in azurerm_eventhub.eventhubs : k => v.partition_count if v.partition_count != null }
@@ -29,10 +25,6 @@ output "eventhubs_partition_count" {
 output "eventhubs_partition_ids" {
   description = "Map of partition_ids values across all eventhubs, keyed the same as var.eventhubs"
   value       = { for k, v in azurerm_eventhub.eventhubs : k => v.partition_ids if v.partition_ids != null && length(v.partition_ids) > 0 }
-}
-output "eventhubs_resource_group_name" {
-  description = "Map of resource_group_name values across all eventhubs, keyed the same as var.eventhubs"
-  value       = { for k, v in azurerm_eventhub.eventhubs : k => v.resource_group_name if v.resource_group_name != null && length(v.resource_group_name) > 0 }
 }
 output "eventhubs_retention_description" {
   description = "Map of retention_description values across all eventhubs, keyed the same as var.eventhubs"

@@ -3,12 +3,10 @@ variable "eventhubs" {
 Map of eventhubs, attributes below
 Required:
     - name
+    - namespace_id
     - partition_count
 Optional:
     - message_retention
-    - namespace_id
-    - namespace_name
-    - resource_group_name
     - status
     - capture_description (block):
         - destination (required, block):
@@ -30,13 +28,11 @@ Optional:
 EOT
 
   type = map(object({
-    name                = string
-    partition_count     = number
-    message_retention   = optional(number)
-    namespace_id        = optional(string)
-    namespace_name      = optional(string)
-    resource_group_name = optional(string)
-    status              = optional(string)
+    name              = string
+    namespace_id      = string
+    partition_count   = number
+    message_retention = optional(number)
+    status            = optional(string)
     capture_description = optional(object({
       destination = object({
         archive_name_format         = string

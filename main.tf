@@ -1,13 +1,11 @@
 resource "azurerm_eventhub" "eventhubs" {
   for_each = var.eventhubs
 
-  name                = each.value.name
-  partition_count     = each.value.partition_count
-  message_retention   = each.value.message_retention
-  namespace_id        = each.value.namespace_id
-  namespace_name      = each.value.namespace_name
-  resource_group_name = each.value.resource_group_name
-  status              = each.value.status
+  name              = each.value.name
+  namespace_id      = each.value.namespace_id
+  partition_count   = each.value.partition_count
+  message_retention = each.value.message_retention
+  status            = each.value.status
 
   dynamic "capture_description" {
     for_each = each.value.capture_description != null ? [each.value.capture_description] : []
