@@ -4,7 +4,7 @@ output "eventhubs_id" {
 }
 output "eventhubs_capture_description" {
   description = "Map of capture_description values across all eventhubs, keyed the same as var.eventhubs"
-  value       = { for k, v in azurerm_eventhub.eventhubs : k => v.capture_description if v.capture_description != null && length(v.capture_description) > 0 }
+  value       = { for k, v in azurerm_eventhub.eventhubs : k => one(v.capture_description) if v.capture_description != null && length(v.capture_description) > 0 }
 }
 output "eventhubs_message_retention" {
   description = "Map of message_retention values across all eventhubs, keyed the same as var.eventhubs"
@@ -36,7 +36,7 @@ output "eventhubs_resource_group_name" {
 }
 output "eventhubs_retention_description" {
   description = "Map of retention_description values across all eventhubs, keyed the same as var.eventhubs"
-  value       = { for k, v in azurerm_eventhub.eventhubs : k => v.retention_description if v.retention_description != null && length(v.retention_description) > 0 }
+  value       = { for k, v in azurerm_eventhub.eventhubs : k => one(v.retention_description) if v.retention_description != null && length(v.retention_description) > 0 }
 }
 output "eventhubs_status" {
   description = "Map of status values across all eventhubs, keyed the same as var.eventhubs"
